@@ -5,11 +5,11 @@ include('templates/header.php'); ?>
 
 
 <main class="border border-secondary bg-danger">
-    
+
 
 
     <div class="container rounded d-flex align-items-center flex-column  bg-white p-5 my-5 ">
-    <p class="fw-bold fs-4 fst-italic p-2 text-center"> BIENVENUE </p>
+        <p class="fw-bold fs-4 fst-italic p-2 text-center"> BIENVENUE </p>
         <div class="row align-item">
             <div class="col text-center m-3">
                 <a href="addPatient.php"> <button class="text-center text-center btn btn-danger bouton">Ajouter un patient <i class="ms-1 fs-4 bi bi-person-rolodex text-white"></i></button></a>
@@ -28,11 +28,11 @@ include('templates/header.php'); ?>
         </div>
         <div class="row align-item">
             <div class="col text-center m-3">
-                <button class="text-center text-center btn btn-danger bouton">Ajouter un spécialiste <i class="ms-1 fs-4 bi bi-file-earmark-medical text-white"></i></button>
+                <a href="addDoctors.php"> <button class="text-center text-center btn btn-danger bouton">Ajouter un spécialiste <i class="ms-1 fs-4 bi bi-file-earmark-medical text-white"></i></button></a>
             </div>
             <div class="col text-center m-3">
-                <button class="text-center text-center btn btn-danger bouton">Gestion des spécialistes <i class="ms-1 fs-4 bi bi-file-earmark-medical text-white"></i></button>
-            </div>
+                <a href="doctorsList.php"><button class="text-center text-center btn btn-danger bouton">Gestion des spécialistes <i class="ms-1 fs-4 bi bi-file-earmark-medical text-white"></i></button>
+            </div></a>
         </div>
         <div class="mt-2">
 
