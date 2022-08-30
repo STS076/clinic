@@ -9,7 +9,7 @@ include('templates/header.php'); ?>
 
 
     <div class="row m-5 justify-content-center bg-white rounded p-5 my-2">
-        <p class="fw-bold fs-4 fst-italic p-2 text-center">Gestion des patients: </p>
+        <p class="fw-bold fs-4 fst-italic p-2 text-center">Gestion des spécialistes: </p>
         <div class="col-10">
 
             <table class="table table-responsive table-hover">
@@ -26,9 +26,9 @@ include('templates/header.php'); ?>
                     <?php foreach($allDoctorsArray as $doctors){ ?>
                     <tr>
                         <th class="text-center" ><?= $doctors['doctors_id']?></th>
-                        <td class="text-center" ><?= $doctors['doctors_name']?></td>
                         <td class="text-center" ><?= $doctors['doctors_lastname']?></td>
-                        <td class="text-center" ><?= $doctors['medicalspecialities_id_medicalspecialities']?></td>
+                        <td class="text-center" ><?= $doctors['doctors_name']?></td>
+                        <td class="text-center" ><?= $doctors['medicalspecialities_name']?></td>
                         <td class="text-center" ><?= $doctors['doctors_mail']?></td>
                     </tr>
                  <?php } ?>

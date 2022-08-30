@@ -8,6 +8,7 @@ if (!isset($_SESSION['user'])) {
 require_once '../config.php';
 require_once '../models/Database.php';
 require_once '../models/Doctors.php';
+require_once '../models/Users.php';
 require_once '../models/Medicalspecialities.php';
 
 $speciality = new Medical();
@@ -63,6 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
+    if (isset($_POST['doctorPassword'])) {
+        if (empty($_POST['doctorPassword'])) {
+            $errors['doctorPassword'] = '*Merci de rentrer un MDP';
+        }
+    }
+
 
     if (count($errors) == 0) {
         $doctorName = htmlspecialchars($_POST['doctorName']);
@@ -70,6 +77,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $doctorPhone = htmlspecialchars($_POST['doctorPhone']);
         $doctorMail = htmlspecialchars($_POST['doctorMail']);
         $medicalspecialities_id_medicalspecialities =  htmlspecialchars($_POST['doctorSpecialty']);
+        $users_password = password_hash($_POST['doctorPassword'], PASSWORD_DEFAULT); 
+        $role_id_role = 3; 
+
+        $userObj = new Users(); 
+        $userObj->addUsers($doctorMail, $users_password, $role_id_role ); 
 
         $doctorObj = new Doctors();
         $doctorObj->addDoctor($doctorName, $doctorSurname, $doctorPhone, $doctorMail, $medicalspecialities_id_medicalspecialities);

@@ -103,5 +103,19 @@ class Users extends Database
 
         return $result;
     }
-}
 
+    public function addUsers(string $users_mail, string $users_password, int $role_id_role ):void 
+    {
+        $pdo = parent::connectDb();
+        $sql = "INSERT INTO `users` (`users_mail`, `users_password`, `role_id_role`)
+        values (:users_mail, :users_password, :role_id_role) ";
+
+        $query = $pdo->prepare($sql);
+
+        $query->bindValue(':users_mail',  $users_mail, PDO::PARAM_STR);
+        $query->bindValue(':users_password',  $users_password, PDO::PARAM_STR);
+        $query->bindValue(':role_id_role',  $role_id_role, PDO::PARAM_STR);
+
+        $query->execute();
+    }
+}

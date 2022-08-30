@@ -32,12 +32,17 @@ include('templates/header.php'); ?>
                 <label class="py-2">Spécialité médicale : <span class="text-danger"><?= isset($errors['doctorSpecialty']) ? $errors['doctorSpecialty'] : '' ?></label>
                
                 <select id="doctorSpecialty" value="<?= isset($_POST['doctorSpecialty']) ? $_POST['doctorSpecialty'] : '' ?>" name="doctorSpecialty">
-                    <option selected disabled>Veuillez sélectionner une spécialité</option>
+                    <option value="">Veuillez sélectionner une spécialité</option>
 
                     <?php foreach( $allSpecialitiesArray as $value) { ?>
                         <option value="<?= $value['medicalspecialities_id'] ?>"><?= $value['medicalspecialities_name']?></option>
                         <?php } ?> 
+
                 </select>
+            </div>
+            <div class="d-flex flex-column">
+                <label class="py-2">MDP : <span class="text-danger"><?= isset($errors['doctorPassword']) ? $errors['doctorPassword'] : '' ?></label>
+                <input type="password" id="doctorPassword" value="<?= isset($_POST['doctorPassword']) ? $_POST['doctorPassword'] : '' ?>" name="doctorPassword">
             </div>
 
             <div class="text-center pt-5">

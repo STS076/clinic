@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require_once '../controllers/dashboard-controller.php';
 include('templates/header.php'); ?>
@@ -9,7 +10,7 @@ include('templates/header.php'); ?>
 
 
     <div class="container rounded d-flex align-items-center flex-column  bg-white p-5 my-5 ">
-        <p class="fw-bold fs-4 fst-italic p-2 text-center"> BIENVENUE </p>
+        <p class="fw-bold fs-4 fst-italic p-2 text-center"> BIENVENUE <?= $_SESSION['user']['users_mail'] ?> </p>
         <div class="row align-item">
             <div class="col text-center m-3">
                 <a href="addPatient.php"> <button class="text-center text-center btn btn-danger bouton">Ajouter un patient <i class="ms-1 fs-4 bi bi-person-rolodex text-white"></i></button></a>
@@ -20,10 +21,10 @@ include('templates/header.php'); ?>
         </div>
         <div class="row align-item">
             <div class="col text-center m-3">
-                <button class="text-center text-center btn btn-danger bouton">Ajouter un RDV <i class="ms-1 fs-4 bi bi-calendar-week text-white"></i></button>
+                <a href="addRDV.php"><button class="text-center text-center btn btn-danger bouton">Ajouter un RDV <i class="ms-1 fs-4 bi bi-calendar-week text-white"></i></button></a>
             </div>
             <div class="col text-center m-3">
-                <button class="text-center text-center btn btn-danger bouton">Gestion des RDV <i class="ms-1 fs-4 bi bi-calendar-week text-white"></i></button>
+                <a href="rdvList.php"><button class="text-center text-center btn btn-danger bouton">Gestion des RDV <i class="ms-1 fs-4 bi bi-calendar-week text-white"></i></button></a>
             </div>
         </div>
         <div class="row align-item">

@@ -83,7 +83,7 @@ class Doctors extends DataBase {
     public function getAllDoctors(): array
     {
         $pdo = parent::connectDb();
-        $sql = "SELECT * FROM `doctors`";
+        $sql = "SELECT * FROM `medicalspecialities` inner join `doctors` on `medicalspecialities_id_medicalspecialities`= `medicalspecialities_id`";
         $query = $pdo->query($sql);
         // query exécute la requete , ne récupère aucune donnée. execute quand récupère les données et avec prepare. protège des injections sql. permet de ne pas mettre par ex des caractères html et sql 
         $result = $query->fetchall();
