@@ -20,6 +20,7 @@ include('templates/header.php'); ?>
                         <th class="text-center" >Prénom</th>
                         <th class="text-center" >Spécialité</th>
                         <th class="text-center" >Email</th>
+                        <th class="text-center" >+ d'info</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,6 +31,7 @@ include('templates/header.php'); ?>
                         <td class="text-center" ><?= $doctors['doctors_name']?></td>
                         <td class="text-center" ><?= $doctors['medicalspecialities_name']?></td>
                         <td class="text-center" ><?= $doctors['doctors_mail']?></td>
+                        <td class="text-center" ><a class="btn bg-warning" href="<?= $doctors['doctors_id']?>"> + d'info</a></td>
                     </tr>
                  <?php } ?>
                 </tbody>

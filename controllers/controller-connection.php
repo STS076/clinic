@@ -46,7 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // si le mail existe alors on va regarder si il existe un mot de passe et s'il est correct
             if (password_verify($_POST['password'], $usersInfos['users_password'])) {
                 $_SESSION['user'] = $usersInfos;
-                header('Location: dashboard.php');
+
+                if ($_SESSION['user']['role_id_role'] == 2) {
+                    header('Location: dashboard.php');
+                } else {
+                    header('Location: rdvList.php');
+                }
+                // header('Location: dashboard.php');
                 exit;
             } else {
                 $errors['connection'] = "Identifiant ou MDP incorrect";

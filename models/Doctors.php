@@ -83,10 +83,33 @@ class Doctors extends DataBase {
     public function getAllDoctors(): array
     {
         $pdo = parent::connectDb();
-        $sql = "SELECT * FROM `medicalspecialities` inner join `doctors` on `medicalspecialities_id_medicalspecialities`= `medicalspecialities_id`";
+        $sql = "SELECT * FROM `medicalspecialities` inner join `doctors` on `medicalspecialities_id_medicalspecialities`= `medicalspecialities_id` order by `doctors_lastname`";
         $query = $pdo->query($sql);
         // query exécute la requete , ne récupère aucune donnée. execute quand récupère les données et avec prepare. protège des injections sql. permet de ne pas mettre par ex des caractères html et sql 
         $result = $query->fetchall();
         return $result;
+    }
+
+
+
+    public function checkIfDoctorExists( $mail)
+    {
+        $pdo = parent::connectDb();
+
+        $sql = "SELECT `doctors_mail` FROM `doctors` inner join `users` WHERE `users_mail`=:mail";
+
+        $query = $pdo->prepare($sql);
+
+        $query->bindValue(':mail', $mail, PDO::PARAM_STR);
+
+        $query->execute();
+
+        $result = $query->fetchAll();
+
+        if (count($result) != 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

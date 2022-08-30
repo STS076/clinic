@@ -10,14 +10,14 @@ require_once '../models/Database.php';
 require_once '../models/Doctors.php';
 require_once '../models/Users.php';
 require_once '../models/Medicalspecialities.php';
+require_once '../models/RDV.php';
+require_once '../models/Patient.php';
 
 $speciality = new Medical();
 $allSpecialitiesArray = $speciality->getAllSpecialities();
 
-// nous allons déclencher nos vérifications lors d'une request méthode POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    // création d'un tableau d'erreurs
     $errors = [];
 
     $regexName = "/^[a-zA-Z-éèëêâäàöôûùüîïç]+$/";
@@ -41,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-
     if (isset($_POST['doctorPhone'])) {
         if (empty($_POST['doctorPhone'])) {
             $errors['doctorPhone'] = '*Numéro de téléphone obligatoire';
@@ -51,6 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (isset($_POST['doctorMail'])) {
+        $doctorObj = new Doctors();
+        $obj = $doctorObj->checkIfDoctorExists($_POST['doctorMail']);
+        if ($doctorObj->checkIfDoctorExists($_POST['doctorMail'])) {
+            $errors['doctorMail'] = '*Cet email existe déjà';
+        }
         if (empty($_POST['doctorMail'])) {
             $errors['doctorMail'] = '*Email obligatoire';
         } else if (!filter_var($_POST['doctorMail'], FILTER_VALIDATE_EMAIL)) { // si ça ne passe pas le filter var : FILTER_VALIDATE_EMAIL
@@ -70,21 +74,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-
     if (count($errors) == 0) {
         $doctorName = htmlspecialchars($_POST['doctorName']);
         $doctorSurname = htmlspecialchars($_POST['doctorSurname']);
         $doctorPhone = htmlspecialchars($_POST['doctorPhone']);
         $doctorMail = htmlspecialchars($_POST['doctorMail']);
         $medicalspecialities_id_medicalspecialities =  htmlspecialchars($_POST['doctorSpecialty']);
-        $users_password = password_hash($_POST['doctorPassword'], PASSWORD_DEFAULT); 
-        $role_id_role = 3; 
+        $users_password = password_hash($_POST['doctorPassword'], PASSWORD_DEFAULT);
+        $role_id_role = 3;
 
-        $userObj = new Users(); 
-        $userObj->addUsers($doctorMail, $users_password, $role_id_role ); 
+        $userObj = new Users();
+        $userObj->addUsers($doctorMail, $users_password, $role_id_role);
 
-        $doctorObj = new Doctors();
-        $doctorObj->addDoctor($doctorName, $doctorSurname, $doctorPhone, $doctorMail, $medicalspecialities_id_medicalspecialities);
+        $newDocObj = new Doctors();
+        $newDocObj->addDoctor($doctorName, $doctorSurname, $doctorPhone, $doctorMail, $medicalspecialities_id_medicalspecialities);
 
         header('Location: dashboard.php');
     }
