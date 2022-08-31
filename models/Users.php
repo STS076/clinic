@@ -62,7 +62,7 @@ class Users extends Database
         // je prépare la requete que je stock dans query à laide de la méthode ->prepare
         $query = $pdo->prepare($sql);
 
-        // je lie la valeur du parametre mai au marqueru nominatif mail à laid de la methodde bindvalue
+        // je lie la valeur du parametre mail au marqueru nominatif mail à laid de la methodde bindvalue
         $query->bindValue(':mail', $mail, PDO::PARAM_STR);
 
         // une fois le mail récupéré j'exécute la requete à l'aide de la methode exécute

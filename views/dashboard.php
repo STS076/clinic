@@ -35,7 +35,7 @@ include('templates/header.php'); ?>
                 <a href="doctorsList.php"><button class="text-center text-center btn btn-danger bouton">Gestion des spécialistes <i class="ms-1 fs-4 bi bi-file-earmark-medical text-white"></i></button>
             </div></a>
         </div>
-        <div class="mt-2">
+        <div class="mt-5">
 
             <a class="text-decoration-none" href="logout.php">
                 <button class="btn text-white bg-info"> DECONNEXION</button>

@@ -1,12 +1,13 @@
 <?php
 
-class Doctors extends DataBase {
-    private $_doctors_id; 
-    private $_doctors_name; 
-    private $_doctors_lastname; 
-    private $_doctors_phonenumber; 
-    private $_doctors_mail; 
-    private $_medicalspecialities_id_medicalspecialities;    
+class Doctors extends DataBase
+{
+    private $_doctors_id;
+    private $_doctors_name;
+    private $_doctors_lastname;
+    private $_doctors_phonenumber;
+    private $_doctors_mail;
+    private $_medicalspecialities_id_medicalspecialities;
 
     public function get_doctors_id()
     {
@@ -63,7 +64,7 @@ class Doctors extends DataBase {
     }
 
 
-    public function addDoctor(string $doctors_name, string $doctors_lastname, string $doctors_phonenumber, string $doctors_mail, int $medicalspecialities_id_medicalspecialities ): void
+    public function addDoctor(string $doctors_name, string $doctors_lastname, string $doctors_phonenumber, string $doctors_mail, int $medicalspecialities_id_medicalspecialities): void
     {
         $pdo = parent::connectDb();
         $sql = "INSERT INTO `doctors` (`doctors_name`, `doctors_lastname`, `doctors_phonenumber`, `doctors_mail`, `medicalspecialities_id_medicalspecialities`)
@@ -75,7 +76,7 @@ class Doctors extends DataBase {
         $query->bindValue(':doctors_lastname', $doctors_lastname, PDO::PARAM_STR);
         $query->bindValue(':doctors_phonenumber', $doctors_phonenumber, PDO::PARAM_STR);
         $query->bindValue(':doctors_mail', $doctors_mail, PDO::PARAM_STR);
-        $query->bindValue(':medicalspecialities_id_medicalspecialities', $medicalspecialities_id_medicalspecialities ,PDO::PARAM_INT);
+        $query->bindValue(':medicalspecialities_id_medicalspecialities', $medicalspecialities_id_medicalspecialities, PDO::PARAM_INT);
 
         $query->execute();
     }
@@ -92,7 +93,7 @@ class Doctors extends DataBase {
 
 
 
-    public function checkIfDoctorExists( $mail)
+    public function checkIfDoctorExists($mail)
     {
         $pdo = parent::connectDb();
 
@@ -111,5 +112,21 @@ class Doctors extends DataBase {
         } else {
             return false;
         }
+    }
+
+    public function getSpecificDoctor($doctors_id): array
+    {
+        $pdo = parent::connectDb();
+
+        $sql = "SELECT * from `doctors` inner join  medicalspecialities on medicalspecialities_id_medicalspecialities=medicalspecialities_id where `doctors_id`=:doctors_id";
+
+        $query = $pdo->prepare($sql);
+
+        $query->bindValue(':doctors_id', $doctors_id, PDO::PARAM_STR);
+
+        $query->execute();
+
+        $result = $query->fetchall();
+        return $result;
     }
 }

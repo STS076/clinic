@@ -89,4 +89,20 @@ class Patient extends DataBase
         $result = $query->fetchall();
         return $result;
     }
+
+    public function getSpecificPatient($patients_id): array
+    {
+        $pdo = parent::connectDb();
+
+        $sql = "SELECT * from `patients` where `patients_id`=:patients_id";
+
+        $query = $pdo->prepare($sql);
+
+        $query->bindValue(':patients_id', $patients_id, PDO::PARAM_STR);
+
+        $query->execute();
+
+        $result = $query->fetchall();
+        return $result;
+    }
 }

@@ -98,14 +98,36 @@ class Appointment extends Database
     {
         $pdo = parent::connectDb();
 
-        $sql = "SELECT * from `rendezvous` inner join `patients`  on `patients_id_patients`=`patients_id` inner join `doctors`  on `doctors_id_doctors`=`doctors_id` inner join `medicalspecialities` on `medicalspecialities_id_medicalspecialities`=`medicalspecialities_id` where `doctors_mail`= :users_mail order by `patients_lastname`";
+        $sql = "SELECT * from `rendezvous` inner join `patients`  on `patients_id_patients`=`patients_id` inner join `doctors`  on `doctors_id_doctors`=`doctors_id` inner join `medicalspecialities` on `medicalspecialities_id_medicalspecialities`=`medicalspecialities_id` where `doctors_mail`= :users_mail ";
 
         $query = $pdo->prepare($sql);
 
         $query->bindValue(':users_mail', $mail, PDO::PARAM_STR);
 
         $query->execute();
-        
+
+        $result = $query->fetchall();
+        return $result;
+    }
+
+    public function getAppointementPatient($patients_id): array
+    {
+        $pdo = parent::connectDb();
+
+        $sql = "SELECT * from `rendezvous` 
+        inner join `patients`  
+        on `patients_id_patients`=`patients_id` 
+        inner join `doctors`  
+        on `doctors_id_doctors`=`doctors_id` 
+        inner join `medicalspecialities` 
+        on `medicalspecialities_id_medicalspecialities`=`medicalspecialities_id` where patients_id_patients=patients_id";
+
+        $query = $pdo->prepare($sql);
+
+        $query->bindValue(':patients_id', $patients_id, PDO::PARAM_STR);
+
+        $query->execute();
+
         $result = $query->fetchall();
         return $result;
     }
