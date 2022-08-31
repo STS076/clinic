@@ -11,9 +11,12 @@ require_once '../models/Patient.php';
 $patient = new Patient();
 $AllpatientArray = $patient->getallPatients();
 $SpecificPatient = $patient->getSpecificPatient($_GET['patient']);
+
+
 $ModifyPatient = $patient->modifyPatient($SpecificPatient[0]['patients_lastname'], $SpecificPatient[0]['patients_firstname'], $SpecificPatient[0]['patients_phonenumber'], $SpecificPatient[0]['patients_address'], $SpecificPatient[0]['patients_mail'], $SpecificPatient[0]['patients_id']);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
 
     // création d'un tableau d'erreurs
     $errors = [];
@@ -49,6 +52,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (isset($_POST['patientMail'])) {
+        if($patient->getSpecificPatient($_GET['patientMail']) == $_GET['patientMail']){
+
+        }
+        $PatientObj = new Patient();
+        if ($PatientObj->checkIfPatientMailExists($_POST['patientMail'])) {
+            $errors['patientMail'] = '*Cet email existe déjà';
+        }
         if (empty($_POST['patientMail'])) {
             $errors['patientMail'] = '*Email obligatoire';
         } else if (!filter_var($_POST['patientMail'], FILTER_VALIDATE_EMAIL)) { // si ça ne passe pas le filter var : FILTER_VALIDATE_EMAIL
@@ -64,13 +74,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     // nous allons déclencher des tests dans la bdd
-    if (count($errors) == 0) {
+    if (count($errors) == 0 ) {
         $lastname = htmlspecialchars($_POST['patientSurname']);
         $firstname = htmlspecialchars($_POST['patientName']);
         $phoneNumber = htmlspecialchars($_POST['patientPhone']);
         $address = htmlspecialchars($_POST['patientAddress']);
         $mail = htmlspecialchars($_POST['patientMail']);
-
 
         $patient = new Patient();
         $AllpatientArray = $patient->getallPatients();

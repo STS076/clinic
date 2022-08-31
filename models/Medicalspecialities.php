@@ -23,6 +23,9 @@ class Medical extends Database
         $this->_medicalspecialities_name = $medicalspecialities_name;
     }
 
+    /**
+     * Fonction pour récupérer les données des spécialités des médecins dans la BDD
+     */
     public function getAllSpecialities(): array
     {
         $pdo = parent::connectDb();

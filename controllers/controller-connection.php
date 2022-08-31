@@ -4,9 +4,6 @@ require_once '../config.php';
 require_once '../models/Database.php';
 require_once '../models/Users.php';
 
-// $login = "sophie";
-// $passwordHash = '$2y$10$qzpuB2nn5O6Gr9SkFERwre7Nd2NN8.N0034dpUfeczvpj71Hh7kLe';
-// $password = password_hash('sophie', PASSWORD_DEFAULT);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

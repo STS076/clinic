@@ -64,6 +64,9 @@ class Doctors extends DataBase
     }
 
 
+    /**
+     * Fonction pour ajouter un médecin 
+     */
     public function addDoctor(string $doctors_name, string $doctors_lastname, string $doctors_phonenumber, string $doctors_mail, int $medicalspecialities_id_medicalspecialities): void
     {
         $pdo = parent::connectDb();
@@ -81,6 +84,9 @@ class Doctors extends DataBase
         $query->execute();
     }
 
+    /**
+     * Fonction pour récupérer toutes les données des docteurs dans la BDD
+     */
     public function getAllDoctors(): array
     {
         $pdo = parent::connectDb();
@@ -92,7 +98,9 @@ class Doctors extends DataBase
     }
 
 
-
+    /**
+     * Fonction pour regarder si le mail existe déjà dans la base de donnée users
+     */
     public function checkIfDoctorExists($mail)
     {
         $pdo = parent::connectDb();
@@ -114,6 +122,9 @@ class Doctors extends DataBase
         }
     }
 
+    /**
+     * Fonction pour avoir les informations d'un seul médecin en fonction de son id
+     */
     public function getSpecificDoctor($doctors_id): array
     {
         $pdo = parent::connectDb();

@@ -65,6 +65,9 @@ class Appointment extends Database
         $this->_doctors_id_doctors = $doctors_id_doctors;
     }
 
+    /**
+     * Fonction pour ajouter un RDV
+     */
     public function addAppointment(string $rendezvous_date, string $rendezvous_hour, string $rendezvous_description, string $patients_id_patients, string $doctors_id_doctors): void
     {
         $pdo = parent::connectDb();
@@ -82,6 +85,9 @@ class Appointment extends Database
         $query->execute();
     }
 
+    /**
+     * Fonction pour récupérer les données de tous les RDV
+     */
     public function getAllAppointement(): array
     {
         $pdo = parent::connectDb();
@@ -94,11 +100,22 @@ class Appointment extends Database
         return $result;
     }
 
+
+    /**
+     * Fonction pour récupérer les données de RDV d'un seul médecin par son adresse email et n'afficher que les RDV du médecin en question
+     */
     public function getSpecificAppointment($mail): array
     {
         $pdo = parent::connectDb();
 
-        $sql = "SELECT * from `rendezvous` inner join `patients`  on `patients_id_patients`=`patients_id` inner join `doctors`  on `doctors_id_doctors`=`doctors_id` inner join `medicalspecialities` on `medicalspecialities_id_medicalspecialities`=`medicalspecialities_id` where `doctors_mail`= :users_mail ";
+        $sql = "SELECT * from `rendezvous` 
+        inner join `patients`  
+        on `patients_id_patients`=`patients_id` 
+        inner join `doctors`  
+        on `doctors_id_doctors`=`doctors_id` 
+        inner join `medicalspecialities` 
+        on `medicalspecialities_id_medicalspecialities`=`medicalspecialities_id` 
+        where `doctors_mail`= :users_mail ";
 
         $query = $pdo->prepare($sql);
 
@@ -110,6 +127,9 @@ class Appointment extends Database
         return $result;
     }
 
+    /**
+     * Permet de récupérer les données d'un rdv spécifique d'un patient, permet d'afficher plus d'info sur ce RDV
+     */
     public function getAppointementPatient($patients_id): array
     {
         $pdo = parent::connectDb();
@@ -120,7 +140,8 @@ class Appointment extends Database
         inner join `doctors`  
         on `doctors_id_doctors`=`doctors_id` 
         inner join `medicalspecialities` 
-        on `medicalspecialities_id_medicalspecialities`=`medicalspecialities_id` where patients_id_patients=patients_id";
+        on `medicalspecialities_id_medicalspecialities`=`medicalspecialities_id` 
+        where patients_id_patients=patients_id";
 
         $query = $pdo->prepare($sql);
 

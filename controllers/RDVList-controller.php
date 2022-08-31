@@ -11,7 +11,6 @@ require_once '../models/Patient.php';
 
 $RDV = new Appointment(); 
 $SpecificAppointmentArray = $RDV->getSpecificAppointment($_SESSION['user']['users_mail']); 
-
 $AllAppointmentArray = $RDV->getAllAppointement( ); 
 
 

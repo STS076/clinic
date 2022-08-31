@@ -63,6 +63,10 @@ class Patient extends DataBase
         $this->_patient_mail = $mail;
     }
 
+
+    /**
+     * fonction pour ajouter un patient
+     */
     public function addPatient(string $lastname, string $firstname, string $phoneNumber, string $address, string $mail): void
     {
         $pdo = parent::connectDb();
@@ -80,6 +84,9 @@ class Patient extends DataBase
         $query->execute();
     }
 
+    /** fonction pour  récupérer les données de tous les patients pour les afficher 
+     * 
+    */
     public function getallPatients(): array
     {
         $pdo = parent::connectDb();
@@ -90,6 +97,9 @@ class Patient extends DataBase
         return $result;
     }
 
+    /**
+     * Fonction pour récupérer les données d'une seul patient par son id
+     */
     public function getSpecificPatient($patients_id): array
     {
         $pdo = parent::connectDb();
@@ -106,6 +116,9 @@ class Patient extends DataBase
         return $result;
     }
 
+    /**
+     * fonction pour modifier les données d'un patient
+     */
     public function modifyPatient($patients_lastname, $patients_firstname, $patients_phonenumber, $patients_address, $patients_mail, $patients_id ): array
     {
         $pdo = parent::connectDb();
@@ -125,5 +138,29 @@ class Patient extends DataBase
 
         $result = $query->fetchall();
         return $result;
+    }
+
+    /**
+     * Fonction pour regarder si le mail existe déjà dans la base de donnée patient lors de la modification d'un patient 
+     */
+    public function checkIfPatientMailExists($patients_mail)
+    {
+        $pdo = parent::connectDb();
+
+        $sql = "SELECT `patients_mail` FROM `patients` where `patients_mail` = :patients_mail";
+
+        $query = $pdo->prepare($sql);
+
+        $query->bindValue(':patients_mail', $patients_mail, PDO::PARAM_STR);
+
+        $query->execute();
+
+        $result = $query->fetchAll();
+
+        if (count($result) != 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -39,23 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // if (isset($_POST['patientAge'])) {
-    //     if (empty($_POST['patientAge'])) {
-    //         $errors['patientAge'] = '*Âge obligatoire';
-    //     }
-    // }
-    // if (isset($_POST['patientSex'])) {
-    //     if (empty($_POST['patientSex'])) {
-    //         $errors['patientSex'] = '*Sexe obligatoire';
-    //     }
-    // }
-
-    // if (isset($_POST['patientSocial'])) {
-    //     if (empty($_POST['patientSocial'])) {
-    //         $errors['patientSocial'] = '*Numéro de sécurité sociale obligatoire';
-    //     }
-    // }
-
     if (isset($_POST['patientPhone'])) {
         if (empty($_POST['patientPhone'])) {
             $errors['patientPhone'] = '*Numéro de téléphone obligatoire';

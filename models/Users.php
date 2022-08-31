@@ -104,6 +104,9 @@ class Users extends Database
         return $result;
     }
 
+    /**
+     * Fonction permettant d'ajouter un user 
+     */
     public function addUsers(string $users_mail, string $users_password, int $role_id_role ):void 
     {
         $pdo = parent::connectDb();
