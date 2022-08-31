@@ -105,4 +105,25 @@ class Patient extends DataBase
         $result = $query->fetchall();
         return $result;
     }
+
+    public function modifyPatient($patients_lastname, $patients_firstname, $patients_phonenumber, $patients_address, $patients_mail, $patients_id ): array
+    {
+        $pdo = parent::connectDb();
+
+        $sql = "UPDATE patients set patients_lastname =:patients_lastname, patients_firstname=:patients_firstname, patients_phonenumber=:patients_phonenumber, patients_address=:patients_address, patients_mail=:patients_mail WHERE patients_id=:patients_id";
+
+        $query = $pdo->prepare($sql);
+
+        $query->bindValue(':patients_lastname', $patients_lastname, PDO::PARAM_STR);
+        $query->bindValue(':patients_firstname', $patients_firstname, PDO::PARAM_STR);
+        $query->bindValue(':patients_phonenumber', $patients_phonenumber, PDO::PARAM_STR);
+        $query->bindValue(':patients_address', $patients_address, PDO::PARAM_STR);
+        $query->bindValue(':patients_mail', $patients_mail, PDO::PARAM_STR);
+        $query->bindValue(':patients_id', $patients_id, PDO::PARAM_STR);
+
+        $query->execute();
+
+        $result = $query->fetchall();
+        return $result;
+    }
 }

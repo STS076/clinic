@@ -32,10 +32,11 @@ include('templates/header.php'); ?>
                                 <th class="text-center">#</th>
                                 <th class="text-center">Date</th>
                                 <th class="text-center">Heure</th>
-                                <th class="text-center">Description</th>
-                                <th class="text-center">Patient</th>
-                                <th class="text-center">Spécialité</th>
+                                <!-- <th class="text-center">Description</th> -->
+                                <!-- <th class="text-center">Patient</th> -->
+                                <!-- <th class="text-center">Spécialité</th> -->
                                 <th class="text-center">+ d'info</th>
+                                <th class="text-center">Modifier</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,10 +46,11 @@ include('templates/header.php'); ?>
                                     <th class="text-center"><?= $value['rendezvous_id'] ?></th>
                                     <td class="text-center"><?= $value['rendezvous_date'] ?></td>
                                     <td class="text-center"><?= $value['rendezvous_hour'] ?></td>
-                                    <td class="text-center"><?= $value['rendezvous_description'] ?></td>
-                                    <td class="text-center"><?= $value['patients_firstname'] ?> <?= $value['patients_lastname'] ?></td>
-                                    <td class="text-center"><?= $value['medicalspecialities_name'] ?></td>
+                                    <!-- <td class="text-center"><?= $value['rendezvous_description'] ?></td> -->
+                                    <!-- <td class="text-center"><?= $value['patients_firstname'] ?> <?= $value['patients_lastname'] ?></td> -->
+                                    <!-- <td class="text-center"><?= $value['medicalspecialities_name'] ?></td> -->
                                     <td class="text-center"><a class="btn bg-warning" href="rdvInfo.php?rdv=<?= $value['rendezvous_id'] ?>"> + d'info</a></td>
+                                    <td class="text-center"><a class="btn bg-warning" href="modifyRDV.php?rdv=<?= $value['rendezvous_id'] ?>">Modifier</a></td>
                                 </tr>
                         <?php }
                         }
@@ -66,6 +68,7 @@ include('templates/header.php'); ?>
                                     <th class="text-center">Docteur</th>
                                     <!-- <th class="text-center">Spécialité</th> -->
                                     <th class="text-center">+ d'info</th>
+                                    <th class="text-center">Modifier</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,6 +82,7 @@ include('templates/header.php'); ?>
                                         <td class="text-center"><?= $value['doctors_name'] ?> <?= $value['doctors_lastname'] ?></td>
                                         <!-- <td class="text-center"><?= $value['medicalspecialities_name'] ?></td> -->
                                         <td class="text-center"><a class="btn bg-warning" href="rdvInfo.php?rdv=<?= $value['rendezvous_id'] ?>"> + d'info</a></td>
+                                        <td class="text-center"><a class="btn bg-warning" href="modifyRDV.php?rdv=<?= $value['rendezvous_id'] ?>">Modifier </a></td>
                                     </tr>
                             <?php }
                             }

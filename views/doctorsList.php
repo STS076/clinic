@@ -15,25 +15,27 @@ include('templates/header.php'); ?>
             <table class="table table-responsive table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center" >#</th>
-                        <th class="text-center" >Nom</th>
-                        <th class="text-center" >Prénom</th>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Nom</th>
+                        <th class="text-center">Prénom</th>
                         <!-- <th class="text-center" >Spécialité</th> -->
                         <!-- <th class="text-center" >Email</th> -->
-                        <th class="text-center" >+ d'info</th>
+                        <th class="text-center">+ d'info</th>
+                        <th class="text-center">Modification</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($allDoctorsArray as $doctors){ ?>
-                    <tr>
-                        <th class="text-center" ><?= $doctors['doctors_id']?></th>
-                        <td class="text-center" ><?= $doctors['doctors_lastname']?></td>
-                        <td class="text-center" ><?= $doctors['doctors_name']?></td>
-                        <!-- <td class="text-center" ><?= $doctors['medicalspecialities_name']?></td> -->
-                        <!-- <td class="text-center" ><?= $doctors['doctors_mail']?></td> -->
-                        <td class="text-center" ><a class="btn bg-warning" href="doctorsInfo.php?doctors=<?= $doctors['doctors_id']?>"> + d'info</a></td>
-                    </tr>
-                 <?php } ?>
+                    <?php foreach ($allDoctorsArray as $doctors) { ?>
+                        <tr>
+                            <th class="text-center"><?= $doctors['doctors_id'] ?></th>
+                            <td class="text-center"><?= $doctors['doctors_lastname'] ?></td>
+                            <td class="text-center"><?= $doctors['doctors_name'] ?></td>
+                            <!-- <td class="text-center" ><?= $doctors['medicalspecialities_name'] ?></td> -->
+                            <!-- <td class="text-center" ><?= $doctors['doctors_mail'] ?></td> -->
+                            <td class="text-center"><a class="btn bg-warning" href="doctorsInfo.php?doctors=<?= $doctors['doctors_id'] ?>"> + d'info</a></td>
+                            <td class="text-center"><a class="btn bg-warning" href="doctorsModify.php?doctors=<?= $doctors['doctors_id'] ?>">Modifier</a></td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

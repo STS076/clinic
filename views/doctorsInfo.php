@@ -29,7 +29,7 @@ include('templates/header.php'); ?>
             </div>
         </div>
         <div class="text-center py-2 mb-5">
-            <a href="dashboard.php"> <button class="btn btn-info text-white" type="submit" value="connect">retour</button></a>
+            <a href="doctorsList.php"> <button class="btn btn-info text-white" type="submit" value="connect">retour</button></a>
 
         </div>
     </div>

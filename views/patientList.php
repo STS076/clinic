@@ -20,6 +20,7 @@ include('templates/header.php'); ?>
                         <th class="text-center" >Prénom</th>
                         <!-- <th class="text-center" >Courriel</th> -->
                         <th class="text-center" >Action</th>
+                        <th class="text-center" >Modifier</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,6 +31,7 @@ include('templates/header.php'); ?>
                         <td class="text-center" ><?= $patient['patients_firstname']?></td>
                         <!-- <td class="text-center" ><?= $patient['patients_mail']?></td> -->
                         <td class="text-center" ><a class="btn bg-warning" href="patientInfo.php?patient=<?= $patient['patients_id']?>"> + d'info</a></td>
+                        <td class="text-center" ><a class="btn bg-warning" href="patientModify.php?patient=<?= $patient['patients_id']?>">Modifier</a></td>
                     </tr>
                  <?php } ?>
                 </tbody>
