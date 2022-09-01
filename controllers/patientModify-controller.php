@@ -11,8 +11,6 @@ require_once '../models/Patient.php';
 $patient = new Patient();
 $AllpatientArray = $patient->getallPatients();
 $SpecificPatient = $patient->getSpecificPatient($_GET['patient']);
-
-
 $ModifyPatient = $patient->modifyPatient($SpecificPatient[0]['patients_lastname'], $SpecificPatient[0]['patients_firstname'], $SpecificPatient[0]['patients_phonenumber'], $SpecificPatient[0]['patients_address'], $SpecificPatient[0]['patients_mail'], $SpecificPatient[0]['patients_id']);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

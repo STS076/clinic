@@ -9,17 +9,17 @@ require_once '../models/RDV.php';
 require_once '../models/Patient.php';
 
 $patient = new Doctors();
-$allDoctorsArray = $patient->getAllDoctors(); 
+$allDoctorsArray = $patient->getAllDoctors();
 
-$patient = new Patient(); 
-$AllpatientArray = $patient->getallPatients(); 
+$patient = new Patient();
+$AllpatientArray = $patient->getallPatients();
 
 $speciality = new Medical();
 $allSpecialitiesArray = $speciality->getAllSpecialities();
 
-$patient = new Appointment(); 
-$AllAppointmentArray = $patient->getAllAppointement(); 
-$SpecificAppointment = $patient->getAppointementPatient($_GET['rdv']); 
+$patient = new Appointment();
+$AllAppointmentArray = $patient->getAllAppointement();
+$SpecificAppointment = $patient->getAppointementPatient($_GET['rdv']);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -70,9 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $doctors_id_doctors = htmlspecialchars($_POST['doctor']);
 
         $RDVObj = new Appointment();
+        $AllAppointmentArray = $RDVObj->getAllAppointement();
+        $SpecificAppointment = $RDVObj->getAppointementPatient($_GET['rdv']); 
+        $ModifyAppointment = $RDVObj->modifyAppointment($rendezvous_date,  $rendezvous_hour,  $rendezvous_description,  $patients_id_patients, $doctors_id_doctors, $SpecificAppointment[0]['rendezvous_id']);
 
-        $RDVObj->addAppointment($rendezvous_date,  $rendezvous_hour,  $rendezvous_description,  $patients_id_patients, $doctors_id_doctors); 
 
-        header('Location: dashboard.php'); 
+        header('Location: rdvList.php');
     }
 }

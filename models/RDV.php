@@ -130,7 +130,7 @@ class Appointment extends Database
     /**
      * Permet de récupérer les données d'un rdv spécifique d'un patient, permet d'afficher plus d'info sur ce RDV
      */
-    public function getAppointementPatient($patients_id): array
+    public function getAppointementPatient($rendezvous_id): array
     {
         $pdo = parent::connectDb();
 
@@ -141,11 +141,35 @@ class Appointment extends Database
         on `doctors_id_doctors`=`doctors_id` 
         inner join `medicalspecialities` 
         on `medicalspecialities_id_medicalspecialities`=`medicalspecialities_id` 
-        where patients_id_patients=patients_id";
+        where rendezvous_id=:rendezvous_id";
 
         $query = $pdo->prepare($sql);
 
-        $query->bindValue(':patients_id', $patients_id, PDO::PARAM_STR);
+        $query->bindValue(':rendezvous_id', $rendezvous_id, PDO::PARAM_STR);
+
+        $query->execute();
+
+        $result = $query->fetchall();
+        return $result;
+    }
+
+    /**
+     * fonction pour modifier les données d'un patient
+     */
+    public function modifyAppointment(string $rendezvous_date, string $rendezvous_hour, string $rendezvous_description, string $patients_id_patients, string $doctors_id_doctors, $rendezvous_id): array
+    {
+        $pdo = parent::connectDb();
+
+        $sql = "UPDATE rendezvous set rendezvous_date =:rendezvous_date, rendezvous_hour=:rendezvous_hour, rendezvous_description=:rendezvous_description, patients_id_patients=:patients_id_patients, doctors_id_doctors=:doctors_id_doctors where rendezvous_id=:rendezvous_id";
+
+        $query = $pdo->prepare($sql);
+
+        $query->bindValue(':rendezvous_date', $rendezvous_date, PDO::PARAM_STR);
+        $query->bindValue(':rendezvous_hour', $rendezvous_hour, PDO::PARAM_STR);
+        $query->bindValue(':rendezvous_description', $rendezvous_description, PDO::PARAM_STR);
+        $query->bindValue(':patients_id_patients', $patients_id_patients, PDO::PARAM_STR);
+        $query->bindValue(':doctors_id_doctors', $doctors_id_doctors, PDO::PARAM_STR);
+        $query->bindValue(':rendezvous_id', $rendezvous_id, PDO::PARAM_STR);
 
         $query->execute();
 

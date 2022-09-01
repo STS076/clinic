@@ -107,7 +107,7 @@ class Users extends Database
     /**
      * Fonction permettant d'ajouter un user 
      */
-    public function addUsers(string $users_mail, string $users_password, int $role_id_role ):void 
+    public function addUsers(string $users_mail, string $users_password, int $role_id_role): void
     {
         $pdo = parent::connectDb();
         $sql = "INSERT INTO `users` (`users_mail`, `users_password`, `role_id_role`)
@@ -120,5 +120,37 @@ class Users extends Database
         $query->bindValue(':role_id_role',  $role_id_role, PDO::PARAM_STR);
 
         $query->execute();
+    }
+
+    /**
+     * Fonction permettant de modifier un user
+     */
+    public function modifyUser($users_mail, $users_password, $role_id_role, $users_id): array
+    {
+        $pdo = parent::connectDb();
+
+        $sql = "UPDATE users set users_mail =:users_mail, users_password=:users_password, role_id_role=:role_id_role WHERE users_id=:users_id";
+
+        $query = $pdo->prepare($sql);
+
+        $query->bindValue(':users_mail', $users_mail, PDO::PARAM_STR);
+        $query->bindValue(':users_password', $users_password, PDO::PARAM_STR);
+        $query->bindValue(':role_id_role', $role_id_role, PDO::PARAM_STR);
+        $query->bindValue(':users_id', $users_id, PDO::PARAM_STR);
+
+        $query->execute();
+
+        $result = $query->fetchall();
+        return $result;
+    }
+
+    public function getAllUsers(): array
+    {
+        $pdo = parent::connectDb();
+        $sql = "SELECT * FROM `users`";
+        $query = $pdo->query($sql);
+        // query exécute la requete , ne récupère aucune donnée. execute quand récupère les données et avec prepare. protège des injections sql. permet de ne pas mettre par ex des caractères html et sql 
+        $result = $query->fetchall();
+        return $result;
     }
 }
