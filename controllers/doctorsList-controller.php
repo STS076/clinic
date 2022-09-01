@@ -10,3 +10,11 @@ $allDoctorsArray = $patient->getAllDoctors();
 // var_dump($AllpatientArray); 
 
 // -> faire appel à. en l'espèce le nouvel objet $patient va appeler la fonction getallPatient
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['delete'])) {
+        $patient->deleteDoctor($_POST['delete']);
+    }
+}
+
+$allDoctorsArray = $patient->getAllDoctors();

@@ -50,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (isset($_POST['patientMail'])) {
-        if($patient->getSpecificPatient($_GET['patientMail']) == $_GET['patientMail']){
-
+        if ($patient->getSpecificPatient($_GET['patient']) == $_POST['patientMail']) {
+         
         }
         $PatientObj = new Patient();
         if ($PatientObj->checkIfPatientMailExists($_POST['patientMail'])) {
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     // nous allons déclencher des tests dans la bdd
-    if (count($errors) == 0 ) {
+    if (count($errors) == 0) {
         $lastname = htmlspecialchars($_POST['patientSurname']);
         $firstname = htmlspecialchars($_POST['patientName']);
         $phoneNumber = htmlspecialchars($_POST['patientPhone']);
@@ -82,9 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $patient = new Patient();
         $AllpatientArray = $patient->getallPatients();
         $SpecificPatient = $patient->getSpecificPatient($_GET['patient']);
-        $ModifyPatient = $patient->modifyPatient($lastname,$firstname, $phoneNumber, $address, $mail, $SpecificPatient[0]['patients_id']  );
+        $ModifyPatient = $patient->modifyPatient($lastname, $firstname, $phoneNumber, $address, $mail, $SpecificPatient[0]['patients_id']);
 
-        header('Location: dashboard.php'); 
+        header('Location: dashboard.php');
     }
 }
-

@@ -14,6 +14,13 @@ $SpecificAppointmentArray = $RDV->getSpecificAppointment($_SESSION['user']['user
 $AllAppointmentArray = $RDV->getAllAppointement( ); 
 // $SpecificAppointment = $patient->getAppointementPatient($_GET['rdv']); 
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['delete'])) {
+        $RDV->deleteAppointment($_POST['delete']);
+    }
+}
+
+$AllAppointmentArray = $RDV->getAllAppointement();
 
 
 

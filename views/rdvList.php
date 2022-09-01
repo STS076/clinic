@@ -38,6 +38,7 @@ include('templates/header.php'); ?>
                                 <!-- <th class="text-center">Spécialité</th> -->
                                 <th class="text-center">+ d'info</th>
                                 <th class="text-center">Modifier</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -52,6 +53,7 @@ include('templates/header.php'); ?>
                                     <!-- <td class="text-center"><?= $value['medicalspecialities_name'] ?></td> -->
                                     <td class="text-center"><a class="btn bg-warning" href="rdvInfo.php?rdv=<?= $value['rendezvous_id'] ?>"> + d'info</a></td>
                                     <td class="text-center"><a class="btn bg-warning" href="modifyRDV.php?rdv=<?= $value['rendezvous_id'] ?>">Modifier</a></td>
+
                                 </tr>
                         <?php }
                         }
@@ -70,6 +72,7 @@ include('templates/header.php'); ?>
                                     <!-- <th class="text-center">Spécialité</th> -->
                                     <th class="text-center">+ d'info</th>
                                     <th class="text-center">Modifier</th>
+                                    <th class="text-center">Supprimer</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -84,7 +87,32 @@ include('templates/header.php'); ?>
                                         <!-- <td class="text-center"><?= $value['medicalspecialities_name'] ?></td> -->
                                         <td class="text-center"><a class="btn bg-warning" href="rdvInfo.php?rdv=<?= $value['rendezvous_id'] ?>"> + d'info</a></td>
                                         <td class="text-center"><a class="btn bg-warning" href="modifyRDV.php?rdv=<?= $value['rendezvous_id'] ?>">Modifier </a></td>
+                                        <td class="text-center"><a class="btn bg-warning" type="button" data-bs-toggle="modal" data-bs-target="#rdv-<?= $value['rendezvous_id'] ?>">Supprimer</a></td>
                                     </tr>
+
+                                    <div class="modal fade" id="rdv-<?= $value['rendezvous_id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <p class="modal-title fs-4" id="exampleModalLabel">Voulez vous supprimer le rendez-vous ? </p>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                           
+                                                <p>Médecin : <?= $value['doctors_name'] ?> <?= $value['doctors_lastname'] ?></p>
+                                                <p>Patient : <?= $value['patients_firstname'] ?> <?= $value['patients_lastname'] ?></p>
+                                                <p>Date : <?= $value['rendezvous_date'] ?> </p>
+                                                <p>Heure : <?= $value['rendezvous_hour'] ?></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                    <form action="" method="POST">
+                                                        <button class="btn btn-primary" name="delete" value="<?= $value['rendezvous_id'] ?>">Supprimer</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                             <?php }
                             }
                             ?>

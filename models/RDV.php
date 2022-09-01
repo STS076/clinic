@@ -156,7 +156,7 @@ class Appointment extends Database
     /**
      * fonction pour modifier les données d'un patient
      */
-    public function modifyAppointment(string $rendezvous_date, string $rendezvous_hour, string $rendezvous_description, string $patients_id_patients, string $doctors_id_doctors, $rendezvous_id): array
+    public function modifyAppointment(string $rendezvous_date, string $rendezvous_hour, string $rendezvous_description, string $patients_id_patients, string $doctors_id_doctors, $rendezvous_id)
     {
         $pdo = parent::connectDb();
 
@@ -173,7 +173,22 @@ class Appointment extends Database
 
         $query->execute();
 
-        $result = $query->fetchall();
-        return $result;
+        // $result = $query->fetchall();
+        // return $result;
+    }
+
+    
+    public function deleteAppointment($rendezvous_id)
+    {
+        $pdo = parent::connectDb();
+
+        $sql = "DELETE from rendezvous where rendezvous_id=:rendezvous_id";
+
+        $query = $pdo->prepare($sql);
+
+        $query->bindValue(':rendezvous_id', $rendezvous_id, PDO::PARAM_STR);
+
+        $query->execute();
+
     }
 }

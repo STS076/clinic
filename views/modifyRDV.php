@@ -25,7 +25,7 @@ include('templates/header.php'); ?>
                 <textarea type="text" id="RDVDescription" name="RDVDescription"><?= $SpecificAppointment[0]['rendezvous_description'] ?></textarea>
             </div>
 
-            <div class="d-flex flex-column">
+            <!-- <div class="d-flex flex-column">
                 <label class="py-2">Patient : <span class="text-danger"><?= isset($errors['patient']) ? $errors['patient'] : '' ?></label>
                 <select id="patient" value="<?= $SpecificAppointment[0]['rendezvous_id'] ?>" name="patient">
                     <option value="">Veuillez sélectionner un patient</option>
@@ -43,7 +43,7 @@ include('templates/header.php'); ?>
                         <option value="<?= $value['doctors_id'] ?>"><?= $value['doctors_name'] ?> <?= $value['doctors_lastname'] ?></option>
                     <?php } ?>
                 </select>
-            </div>
+            </div> -->
 
 
             <div class="text-center pt-5">

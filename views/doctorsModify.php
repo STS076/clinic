@@ -7,7 +7,7 @@ include('templates/header.php'); ?>
 
     <div class="container rounded d-flex align-items-center flex-column  bg-white p-5">
 
-        <p class="fw-bold fs-4 fst-italic p-2">Ajouter un nouveau spécialiste : </p>
+        <p class="fw-bold fs-4 fst-italic p-2">Modifier un spécialiste : </p>
 
         <form method="POST" class="col-lg-5 col-11" action="">
 

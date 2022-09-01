@@ -141,10 +141,10 @@ class Doctors extends DataBase
         return $result;
     }
 
-       /**
+    /**
      * fonction pour modifier les données d'un médecin
      */
-    public function modifyDoctor($doctors_name, $doctors_lastname, $doctors_phonenumber, $doctors_mail, $medicalspecialities_id_medicalspecialities, $doctors_id ): array
+    public function modifyDoctor($doctors_name, $doctors_lastname, $doctors_phonenumber, $doctors_mail, $medicalspecialities_id_medicalspecialities, $doctors_id)
     {
         $pdo = parent::connectDb();
 
@@ -161,7 +161,21 @@ class Doctors extends DataBase
 
         $query->execute();
 
-        $result = $query->fetchall();
-        return $result;
+        // $result = $query->fetchall();
+        // return $result;
+    }
+
+    /**si récupère des données, doit faire prepare execute, si ne fait rien seulement query */
+    public function deleteDoctor($doctors_id)
+    {
+        $pdo = parent::connectDb();
+
+        $sql = "DELETE from doctors where doctors_id=:doctors_id";
+
+        $query = $pdo->prepare($sql);
+
+        $query->bindValue(':doctors_id', $doctors_id, PDO::PARAM_STR);
+
+        $query->execute();
     }
 }

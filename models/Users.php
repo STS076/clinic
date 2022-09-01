@@ -125,7 +125,7 @@ class Users extends Database
     /**
      * Fonction permettant de modifier un user
      */
-    public function modifyUser($users_mail, $users_password, $role_id_role, $users_id): array
+    public function modifyUser($users_mail, $users_password, $role_id_role, $users_id)
     {
         $pdo = parent::connectDb();
 
@@ -140,8 +140,8 @@ class Users extends Database
 
         $query->execute();
 
-        $result = $query->fetchall();
-        return $result;
+        // $result = $query->fetchall();
+        // return $result;
     }
 
     public function getAllUsers(): array

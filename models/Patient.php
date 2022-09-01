@@ -86,7 +86,7 @@ class Patient extends DataBase
 
     /** fonction pour  récupérer les données de tous les patients pour les afficher 
      * 
-    */
+     */
     public function getallPatients(): array
     {
         $pdo = parent::connectDb();
@@ -99,6 +99,8 @@ class Patient extends DataBase
 
     /**
      * Fonction pour récupérer les données d'une seul patient par son id
+     * si ne récupère qu'un seul patient pas nécessaire de faire fetchall tableau à deux dimension peut faire seulement fetch
+     * seulement fetch si SELECT
      */
     public function getSpecificPatient($patients_id): array
     {
@@ -119,7 +121,7 @@ class Patient extends DataBase
     /**
      * fonction pour modifier les données d'un patient
      */
-    public function modifyPatient($patients_lastname, $patients_firstname, $patients_phonenumber, $patients_address, $patients_mail, $patients_id ): array
+    public function modifyPatient($patients_lastname, $patients_firstname, $patients_phonenumber, $patients_address, $patients_mail, $patients_id)
     {
         $pdo = parent::connectDb();
 
@@ -136,8 +138,8 @@ class Patient extends DataBase
 
         $query->execute();
 
-        $result = $query->fetchall();
-        return $result;
+        // $result = $query->fetchall();
+        // return $result;
     }
 
     /**
@@ -162,5 +164,20 @@ class Patient extends DataBase
         } else {
             return false;
         }
+    }
+
+    public function deletePatient($patients_id)
+    {
+        $pdo = parent::connectDb();
+
+        $sql = "DELETE from patients where patients_id=:patients_id";
+
+        $query = $pdo->prepare($sql);
+
+        $query->bindValue(':patients_id', $patients_id, PDO::PARAM_STR);
+
+        $query->execute();
+
+       
     }
 }

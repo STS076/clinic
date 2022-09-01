@@ -50,11 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (isset($_POST['doctorMail'])) {
-        // $doctorObj = new Doctors();
-        // $obj = $doctorObj->checkIfDoctorExists($_POST['doctorMail']);
-        // if ($doctorObj->checkIfDoctorExists($_POST['doctorMail'])) {
-        //     $errors['doctorMail'] = '*Cet email existe déjà';
-        // }
+        $doctorObj = new Doctors();
+        $obj = $doctorObj->checkIfDoctorExists($_POST['doctorMail']);
+        if ($doctorObj->checkIfDoctorExists($_POST['doctorMail'])) {
+            $errors['doctorMail'] = '*Cet email existe déjà';
+        }
         if (empty($_POST['doctorMail'])) {
             $errors['doctorMail'] = '*Email obligatoire';
         } else if (!filter_var($_POST['doctorMail'], FILTER_VALIDATE_EMAIL)) { // si ça ne passe pas le filter var : FILTER_VALIDATE_EMAIL
