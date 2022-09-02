@@ -10,14 +10,17 @@ require_once '../models/Database.php';
 require_once '../models/Doctors.php';
 require_once '../models/Users.php';
 require_once '../models/Medicalspecialities.php';
-require_once '../models/RDV.php'; 
+require_once '../models/RDV.php';
 require_once '../models/Patient.php';
 
-$patient = new Doctors();
-$allDoctorsArray = $patient->getAllDoctors(); 
 
-$patient = new Patient(); 
-$AllpatientArray = $patient->getallPatients(); 
+$today = date('d/m/Y');
+
+$patient = new Doctors();
+$allDoctorsArray = $patient->getAllDoctors();
+
+$patient = new Patient();
+$AllpatientArray = $patient->getallPatients();
 
 $speciality = new Medical();
 $allSpecialitiesArray = $speciality->getAllSpecialities();
@@ -32,6 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $regexPhoneNumber = "/^[0-9]{10}+$/";
 
     if (isset($_POST['RDVDate'])) {
+        if ($_POST['RDVDate'] < $today) {
+            $errors['RDVDate'] = '* Merci de choisir une date valable';
+        }
         if (empty($_POST['RDVDate'])) {
             $errors['RDVDate'] = '*Date obligatoire';
         }
@@ -73,8 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $RDVObj = new Appointment();
 
-        $RDVObj->addAppointment($rendezvous_date,  $rendezvous_hour,  $rendezvous_description,  $patients_id_patients, $doctors_id_doctors); 
+        $RDVObj->addAppointment($rendezvous_date,  $rendezvous_hour,  $rendezvous_description,  $patients_id_patients, $doctors_id_doctors);
 
-        header('Location: dashboard.php'); 
+        header('Location: dashboard.php');
     }
 }

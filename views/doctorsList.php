@@ -51,7 +51,7 @@ include('templates/header.php'); ?>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                                         <form action="" method="POST">
-                                            <button class="btn btn-primary" name="delete" value="<?= $doctors['doctors_id'] ?>">Supprimer</button>
+                                            <button class="btn btn-primary" name="delete" value="<?= $doctors['doctors_id'] ?> ">Supprimer</button>
                                         </form>
                                     </div>
                                 </div>

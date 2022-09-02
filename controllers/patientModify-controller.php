@@ -11,7 +11,7 @@ require_once '../models/Patient.php';
 $patient = new Patient();
 $AllpatientArray = $patient->getallPatients();
 $SpecificPatient = $patient->getSpecificPatient($_GET['patient']);
-$ModifyPatient = $patient->modifyPatient($SpecificPatient[0]['patients_lastname'], $SpecificPatient[0]['patients_firstname'], $SpecificPatient[0]['patients_phonenumber'], $SpecificPatient[0]['patients_address'], $SpecificPatient[0]['patients_mail'], $SpecificPatient[0]['patients_id']);
+// $ModifyPatient = $patient->modifyPatient($SpecificPatient[0]['patients_lastname'], $SpecificPatient[0]['patients_firstname'], $SpecificPatient[0]['patients_phonenumber'], $SpecificPatient[0]['patients_address'], $SpecificPatient[0]['patients_mail'], $SpecificPatient[0]['patients_id']);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -50,13 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (isset($_POST['patientMail'])) {
-        if ($patient->getSpecificPatient($_GET['patient']) == $_POST['patientMail']) {
+        // if ($patient->getSpecificPatient($_GET['patient']) == $_POST['patientMail']) {
          
-        }
-        $PatientObj = new Patient();
-        if ($PatientObj->checkIfPatientMailExists($_POST['patientMail'])) {
-            $errors['patientMail'] = '*Cet email existe déjà';
-        }
+        // }
+        // $PatientObj = new Patient();
+        // if ($PatientObj->checkIfPatientMailExists($_POST['patientMail'])) {
+        //     $errors['patientMail'] = '*Cet email existe déjà';
+        // }
         if (empty($_POST['patientMail'])) {
             $errors['patientMail'] = '*Email obligatoire';
         } else if (!filter_var($_POST['patientMail'], FILTER_VALIDATE_EMAIL)) { // si ça ne passe pas le filter var : FILTER_VALIDATE_EMAIL
@@ -82,8 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $patient = new Patient();
         $AllpatientArray = $patient->getallPatients();
         $SpecificPatient = $patient->getSpecificPatient($_GET['patient']);
+        var_dump($SpecificPatient);
         $ModifyPatient = $patient->modifyPatient($lastname, $firstname, $phoneNumber, $address, $mail, $SpecificPatient[0]['patients_id']);
 
-        header('Location: dashboard.php');
+        //header('Location: dashboard.php');
     }
 }

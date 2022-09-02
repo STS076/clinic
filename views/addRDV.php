@@ -13,11 +13,11 @@ include('templates/header.php'); ?>
 
             <div class="d-flex flex-column">
                 <label class="py-2">Date du RDV : <span class="text-danger"><?= isset($errors['RDVDate']) ? $errors['RDVDate'] : '' ?></span></label>
-                <input type="date" id="RDVDate" value="<?= isset($_POST['RDVDate']) ? $_POST['RDVDate'] : '' ?>" name="RDVDate">
+                <input type="date" id="RDVDate" min="<?= $today ?>" value="<?= isset($_POST['RDVDate']) ? $_POST['RDVDate'] : '' ?>" name="RDVDate">
             </div>
             <div class="d-flex flex-column">
                 <label class="py-2">Heure du RDV : <span class="text-danger"><?= isset($errors['RDVHour']) ? $errors['RDVHour'] : '' ?></span></label>
-                <input type="time" id="RDVHour" value="<?= isset($_POST['RDVHour']) ? $_POST['RDVHour'] : '' ?>" name="RDVHour">
+                <input type="time" id="RDVHour" min="08:00" max="18:00"value="<?= isset($_POST['RDVHour']) ? $_POST['RDVHour'] : '' ?>" name="RDVHour">
 
             </div>
             <div class="d-flex flex-column">

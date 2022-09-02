@@ -2,19 +2,21 @@
 require_once '../config.php';
 require_once '../models/Database.php';
 require_once '../models/Doctors.php';
+require_once '../models/Users.php';
 require_once '../models/Medicalspecialities.php';
+require_once '../models/RDV.php'; 
+require_once '../models/Patient.php';
 
-$patient = new Doctors();
-// var_dump($patient); 
-$allDoctorsArray = $patient->getAllDoctors(); 
-// var_dump($AllpatientArray); 
+$user = new Users();
+$doctor = new Doctors();
+$allDoctorsArray = $doctor->getAllDoctors();
 
-// -> faire appel à. en l'espèce le nouvel objet $patient va appeler la fonction getallPatient
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['delete'])) {
-        $patient->deleteDoctor($_POST['delete']);
+        $specificDoctor = $doctor->getSpecificDoctor($_POST['delete']); 
+        $user->deleteUser($specificDoctor[0]['doctors_mail']);
+        $doctor->deleteDoctor($_POST['delete']);
     }
 }
-
-$allDoctorsArray = $patient->getAllDoctors();
+$allDoctorsArray = $doctor->getAllDoctors();

@@ -153,4 +153,18 @@ class Users extends Database
         $result = $query->fetchall();
         return $result;
     }
+
+      /**si récupère des données, doit faire prepare execute, si ne fait rien seulement query */
+      public function deleteUser($users_mail)
+      {
+          $pdo = parent::connectDb();
+  
+          $sql = "DELETE from users where users_mail=:users_mail";
+  
+          $query = $pdo->prepare($sql);
+  
+          $query->bindValue(':users_mail', $users_mail, PDO::PARAM_STR);
+  
+          $query->execute();
+      }
 }
